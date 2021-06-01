@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# -*- coding:UTF-8 -*-
+
+import random  # 导入random模块
+import string  # 导入string模块
+
+salt = '!@#$%^&*()><?'  #定义了一个字符串来把所有的特殊字符写进去了
+
+
+def passwd(length, type):
+    if type == 3:
+        chars = string.ascii_letters + string.digits + salt
+        return ''.join(random.sample(chars, length))
+    elif type == 2:
+        chars = string.ascii_letters + string.digits
+        return ''.join(random.sample(chars, length))
+    else:
+        chars = string.digits
+        return ''.join([random.choice(chars) for i in range(length)])
+    # 通过随机从chars获取字符生成密码
+    # return ''.join([random.choice(chars) for i in range(length)])
+    # 通过sample函数直接从chars中获取要求长度的随机顺序的字符以达到去重的效果
+
+
+if __name__ == '__main__':
+    # mainInput = map(int, input('输入需求类型(1.仅数字 2.数字字母 3.数字字母字符):\n').split())
+    # print(mainInput)
+    # length = input('输入密码长度:\n')
+    while True:  # 设置生成密码的个数
+        type, length = map(int, raw_input('输入需求类型(1.仅数字 2.数字字母 3.数字字母字符):\n').split())
+        # print(passwd(mainInput[1], mainInput[0]))  # passwd(8) 这里的8是设定密码的位数。
+        print(passwd(length, type))  # passwd(8) 这里的8是设定密码的位数。
